@@ -1,4 +1,4 @@
---write a query to print top 5 cities with highest spends and their percentage contribution of total credit card spends 
+--top 5 cities with highest spends and their percentage contribution of total credit card spends 
 select top 5 city, sum(amount) as total_spend,
 round(sum(amount) * 100.0/ (select sum(amount) from credit_card_transactions), 3) as spend_percentage
 from credit_card_transactions
@@ -6,7 +6,7 @@ group by city
 order by spend_percentage desc;
 
 
---write a query to print highest spend month and amount spent in that month for each card type
+--highest spend month and amount spent in that month for each card type
 with cte as (
 select card_type,
 datepart(month, transaction_date) as month,
@@ -21,7 +21,7 @@ from cte
 where rnk = 1;
 
 
--- write a query to print the transaction details(all columns from the table) for each card type when
+-- transaction details(all columns from the table) for each card type when
 -- it reaches a cumulative of 1000000 total spends(We should have 4 rows in the o/p one for each card type)
 with cte as (
 select *, sum(amount) over(partition by card_type order by transaction_date, transaction_id) as running_sum
@@ -37,7 +37,7 @@ from cte2
 where rnk = 1;
 
 
---write a query to find city which had lowest percentage spend for gold card type
+--city which had lowest percentage spend for gold card type
 select top 1 city, sum(case when card_type = 'Gold' then amount else 0 end) * 100.0/sum(amount) as lowest_percent
 from credit_card_transactions
 group by city
@@ -45,7 +45,7 @@ having sum(case when card_type = 'Gold' then amount else 0 end) * 100.0/sum(amou
 order by lowest_percent;
 
 
---write a query to print 3 columns:  city, highest_expense_type , lowest_expense_type (example format : Delhi , bills, Fuel)
+--print 3 columns:  city, highest_expense_type , lowest_expense_type (example format : Delhi , bills, Fuel)
 with cte as (
 select city, exp_type, sum(amount) as amount_spent,
 rank() over(partition by city order by sum(amount)) as rnkl,
@@ -70,7 +70,7 @@ inner join l on h.city = l.city
 order by h.city;
 
 
---write a query to find percentage contribution of spends by females for each expense type
+--find percentage contribution of spends by females for each expense type
 select exp_type,
 sum(case when gender = 'F' then amount else 0 end) * 100.0 / sum(amount) as spend_percentage
 from credit_card_transactions
