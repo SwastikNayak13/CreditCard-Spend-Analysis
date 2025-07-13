@@ -8,11 +8,8 @@ A complete portfolio project analyzing Indian credit card transactions using SQL
 - Goal: Derive insights on consumer spending behavior across cities, card types, and expense types
 
 ## Key Insights
-- Top 5 cities by total spend and % contribution
-- Monthly peak spend by card type
-- Cumulative ₹1M spend detection by card
-- Gender-wise and expense-type insights
-- Spending behavior over time
+- Wrote 10+ optimized SQL queries demonstrating skills in joins, window functions, CTEs, aggregation, ranking, date/time functions, and conditional logic for real-world data analysis.
+- Visualized some of the findings using PowerBI
 
 ## 📊 Dashboard Preview
 
